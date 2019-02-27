@@ -1,0 +1,510 @@
+
+\documentclass{article}
+\usepackage{tabularx}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+
+\title{\bf{Test Report}\\
+\bf{Liquid Rescaling}}
+\author{Team 35 - Marshiel \\
+Lab 03\\
+Marlee Roth - rothm1 \\
+Daniel Wolff - wolffd \\
+Harsh Shah - shahhk2}
+\date{December 6, 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\listoftables
+
+\newpage
+
+\section{Revision History}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Date & Developer & Changes Made & Revision \\
+        \hline
+        November 25, 2017 & Harsh Shah & Initial draft & Revision 1.0 \\
+        \hline
+        November 27, 2017 & Daniel Wolff & Update white-box tests & Revision 1.1 \\
+        \hline
+        November 28, 2017 & Marlee Roth & Begin black-box testing & Revision 1.2 \\
+        \hline
+        November 30, 2017 & Marlee Roth & Finalize black-box tests & Revision 1.3 \\
+        \hline
+        November 30, 2017 & Daniel Wolff & Finalize white-box tests & Revision 1.4 \\
+        \hline
+        December 5, 2017 & Harsh Shah & Supporting documentation & Revision 1.5 \\
+        \hline
+        December 6, 2017 & Harsh Shah & Finalizing document & Revision 1.5 \\
+        \hline
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+\section{Overview}
+
+\subsection{Summary}
+This document is intended to provide a complete description of all tests performed on the Liquid Rescaling Application. Due to the nature of the application, the design of the project was very user interface focused. Therefore, the structure of the modules was carefully designed to isolate the core functionality of the program from the user interface implementations, allowing as much unit testing as possible. The user interface was tested through manual testing only. All tests were done dynamically.
+
+\subsection{Environment and Background}
+\subsubsection{Module Overview}
+The Liquid Rescaling Application is built with four modules (excluding the testing module): 
+
+\begin{table}[h!]
+    \caption{Brief description of modules}
+    \label{tab:mod_desc}
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Module} & \textbf{Description} \\
+        \hline
+        dialog.h & Handles dialog box actions \\
+        \hline
+        draw.h & Handles image displaying \\
+        \hline
+        rescale.h & Algorithm used for image processing \\
+        \hline
+        ui.h & User interface functions and event handling \\
+        \hline
+    \end{tabular}
+    
+\end{table}
+
+The main.cpp file is responsible for running the program or running automated tests, depending on its configuration (see Automated Testing).
+
+The test.h file contains all unit tests implemented with an automated testing framework.
+
+\subsubsection{Automated Testing}
+The automated test framework that is used is the main unit test framework used for C++ applications: CPPUnit. This testing is initialized by the definition of the \textit{\_\_DO\_TESTING\_\_} flag in main.cpp, and the output of the test results can be found in a generated file named \textit{LiquidRescaleTestResults.xml} (located in the same folder as the application executable). All automated tests will be conducted as white box testing. \\
+
+\subsubsection{Manual Testing}
+All manual testing has been conducted by Team Marshiel and has been conducted on multiple Linux machines. All manual tests will be black box tests. \\
+
+\newpage
+
+\section{Functions}
+
+\begin{table}[h!]
+    \centering
+    \caption{Function Overview}
+    \label{tab:funcs}
+    \begin{tabular}{|p{0.07\textwidth}|c|c|p{0.25\textwidth}|p{0.2\textwidth}|}
+        \hline
+        \textbf{Item No.} & \textbf{Module} & \textbf{Function} & \textbf{Input} & \textbf{Output} \\
+        \hline
+        1.1 & ui.h & run & & integer \\
+        \hline
+        1.2 & ui.h & init & & integer \\
+        \hline
+        1.3 & ui.h & init\_filters & & integer \\
+        \hline
+        1.4 & ui.h & init\_ui & & integer \\
+        \hline
+        1.5 & ui.h & init\_styles & string & integer \\
+        \hline
+        1.6 & ui.h & init\_handlers & & integer \\
+        \hline
+        1.7 & ui.h & on\_load\_image & & \\
+        \hline
+        1.8 & ui.h & on\_save\_image & & \\
+        \hline
+        1.9 & ui.h & on\_scale\_image & & \\
+        \hline
+        2.1 & dialog.h & GetFileExtension & const string\& & string \\
+        \hline
+        2.2 & dialog.h & displayMessage & Window\&, const string\& & bool \\
+        \hline
+        2.3 & dialog.h & openImageDialog & Window\&, RefPtr$<$FileFilter$>$, string\& & bool \\
+        \hline
+        2.4 & dialog.h & saveImageDialog & Window\&, RefPtr$<$FileFilter$>$, RefPtr$<$Pixbuf$>$, string\& & bool \\
+        \hline
+        3.1 & draw.h & Dimensions::operator== & const Dimensions\& & bool \\
+        \hline
+        3.2 & draw.h & bestFitToDimensions & Dimensions, Dimensions, integer & Dimensions \\
+        \hline
+        3.3 & draw.h & drawImage & Window\&, RefPtr$<$Pixbuf$>$, Image, integer & \\
+        \hline
+        4.1 & rescale.h & pixelFromPixbufData & guint8*, integer, integer & guchar* \\
+        \hline
+        4.2 & rescale.h & pixbufFromCarver & LqrCarver* & RefPtr$<$Pixbuf$>$ \\
+        \hline
+        4.3 & rescale.h & bufferFromPixbuf & RefPtr$<$Pixbuf$>$ & guchar* \\
+        \hline
+        4.4 & rescale.h & liquidRescaleImage & RefPtr$<$Pixbuf$>$, integer, integer & RefPtr$<$Pixbuf$>$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\section{Test Results}
+
+\subsection{White Box (Automated) Testing }
+
+This section is a summary of all tests ran through automated testing in the test.h module. These tests exercised a white-box (structural) approach to testing. Exception tests are separated from normal tests.
+
+\subsubsection{Testing Function 2.1: GetFileExtension}
+\begin{table}[H]
+    \caption{Normal tests for GetFileExtension}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c|c||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        WT1 & "afe.c.bcd" & "bcd" & "bcd" & Passed \\
+        \hline
+        WT2 & "a.b" & "b" & "b" & Passed \\
+        \hline
+        WT3 & ".b" & "b" & "b" & Passed \\
+        \hline
+        WT4 & "a." & "" & "" & Passed \\
+        \hline
+        WT5 & "a" & "" & "" & Passed \\
+        \hline
+        WT6 & "a.b.c" & "c" & "c" & Passed \\
+        \hline
+        WT7 & "a.b.." & "" & "" & Passed \\
+        \hline
+        WT8 & "" & "" & "" & Passed \\
+        \hline
+        WT9 & "." & "" & "" & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \caption{Exception tests for GetFileExtension}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c||c|}
+        \hline
+        \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+         &  &  &  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Testing Function 3.1: Dimensions::operator==}
+\begin{table}[H]
+    \caption{Normal tests for Dimensions::operator==}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c|c||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        WT10 & x(100,100), y(100,200) & false & false & Passed \\
+        \hline
+        WT11 & x(100,100), y(200,100) & false & false & Passed \\
+        \hline
+        WT12 & x(100,200), y(100,100) & false & false & Passed \\
+        \hline
+        WT13 & x(200,100), y(100,100) & false & false & Passed \\
+        \hline
+        WT14 & x(100,100), y(100,100) & true & true & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \caption{Exception tests for Dimensions::operator==}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c||c|}
+        \hline
+        \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+         &  &  &  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Testing Function 3.2: bestFitToDimensions}
+\begin{table}[H]
+    \caption{Normal tests for bestFitToDimensions}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|p{0.225\textwidth}|c|c||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        WT15 & src(100,100), display(100,100), buff=0 & (100,100) & (100,100) & Passed \\
+        \hline
+        WT16 & src(100,100), display(100,100), buff=10 & (80,80) & (80,80) & Passed \\
+        \hline
+        WT17 & src(50,100), display(100,100), buff=10 & (40,80) & (40,80) & Passed \\
+        \hline
+        WT18 & src(1,2), display(100,100), buff=10 & (40,80) & (40,80) & Passed \\
+        \hline
+        WT19 & src(100,100), display(100,40), buff=10 & (20,20) & (20,20) & Passed \\
+        \hline
+        WT20 & src(100,100), display(40,100), buff=10 & (20,20) & (20,20) & Passed \\
+        \hline
+        WT21 & src(200,400), display(100,40), buff=10 & (10,20) & (10,20) & Passed \\
+        \hline
+        WT22 & src(200,400), display(40,100), buff=10 & (20,40) & (20,40) & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \caption{Exception tests for bestFitToDimensions}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c|c||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        ET1 & src.width $<$ 1 &  invalid\_argument &  invalid\_argument & Passed \\
+        \hline
+        ET2 & src.height $<$ 1 &  invalid\_argument &  invalid\_argument & Passed \\
+        \hline
+        ET3 & display.width $<$ 1 &  invalid\_argument &  invalid\_argument & Passed \\
+        \hline
+        ET4 & display.height $<$ 1 &  invalid\_argument &  invalid\_argument & Passed \\
+        \hline
+        ET5 & buffer $<$ 0 &  invalid\_argument &  invalid\_argument & Passed \\
+        \hline
+        ET6 & display.width - buffer * 2 $<$ 1 &  invalid\_argument &  invalid\_argument & Passed \\
+        \hline
+        ET7 & display.height - buffer * 2 $<$ 1 &  invalid\_argument &  invalid\_argument & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Testing Function 4.2: pixbufFromCarver}
+\begin{table}[H]
+    \caption{Normal tests for pixbufFromCarver}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c|c||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        WT23 & carver(someImage) & result[i] = carver[i] & result[i] = carver[i] & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \caption{Exception tests for pixbufFromCarver}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c||c|}
+        \hline
+        \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+         &  &  &  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Testing Function 4.3: bufferFromPixbuf}
+\begin{table}[H]
+    \caption{Normal tests for bufferFromPixbuf}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c|c||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        WT24 & pixbuf(someImage) & result[i] = pixbuf[i] & result[i] = pixbuf[i] &  \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \caption{Exception tests for bufferFromPixbuf}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|c|c||c|}
+        \hline
+        \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+         &  &  &  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Testing Function 4.4: liquidRescaleImage}
+\begin{table}[H]
+    \caption{Normal tests for liquidRescaleImage}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|p{0.25\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        WT25 & someImage(100,100), newW=100, newH=100 & res.w=newW, res.h=newH & res.w=newW, res.h=newH & Passed \\
+        \hline
+        WT26 & someImage(100,100), newW=200, newH=300 & res.w=newW, res.h=newH & res.w=newW, res.h=newH & Passed \\
+        \hline
+        WT27 & someImage(100,100), newW=200, newH=50 & res.w=newW, res.h=newH & res.w=newW, res.h=newH & Passed \\
+        \hline
+        WT28 & someImage(100,100), newW=50, newH=300 & res.w=newW, res.h=newH & res.w=newW, res.h=newH & Passed \\
+        \hline
+        WT29 & someImage(100,100), newW=50, newH=25 & res.w=newW, res.h=newH & res.w=newW, res.h=newH & Passed \\
+        \hline
+        WT30 & someImage(100,100), newW=2, newH=2 & res.w=newW, res.h=newH & res.w=newW, res.h=newH & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[H]
+    \caption{Exception tests for liquidRescaleImage}
+    \label{tab:wb}
+    \centering
+    \begin{tabular}{|c|p{0.25\textwidth}|c|c||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Test case} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        ET8 & someImage(100,100), newW=1, newH=10 & invalid\_argument & invalid\_argument & Passed \\
+        \hline
+        ET9 & someImage(100,100), newW=10, newH=1 & invalid\_argument & invalid\_argument & Passed \\
+        \hline
+        ET10 & someImage(100,100), newW=1, newH=1 & invalid\_argument & invalid\_argument & Passed \\
+        \hline
+        ET11 & someImage(1,1), newW=10, newH=10 & invalid\_argument & invalid\_argument & Passed \\
+        \hline
+        ET12 & someImage(1,10), newW=10, newH=10 & invalid\_argument & invalid\_argument & Passed \\
+        \hline
+        ET13 & someImage(10,1), newW=10, newH=10 & invalid\_argument & invalid\_argument & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\subsection{Black Box (Manual) Testing }
+
+This section is a summary of tests regarding the system as a whole using a black-box (functional) approach. The system was tested with the black-box tests outlined in the Test Plan. All of the following tests are conducted on the initial state defined by the description of the test in the Test Plan.
+
+\begin{table}[H]
+    \caption{Black-box System Tests}
+    \label{tab:bb}
+    \centering
+    \begin{tabular}{|c|c|p{0.25\textwidth}||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        BT1 & Acceptable output image & Acceptable output image & Passed \\
+        \hline
+        BT2 & Acceptable output image & Acceptable output image & Passed \\
+        \hline
+        BT3 & Acceptable output image & Acceptable output image & Passed \\
+        \hline
+        BT4 & Acceptable output image & Acceptable output image & Passed \\
+        \hline
+        BT5 & Acceptable output image & Acceptable output image & Passed \\
+        \hline
+        BT6 & Acceptable output image & Acceptable output image & Passed \\
+        \hline
+        BT7 & Acceptable output image & Acceptable output image & Passed \\
+        \hline
+        BT8 & Acceptable output image & Distorted output image & Failed \\
+        \hline
+        BT9 & Transparent image loaded & Transparent image loaded & Passed \\
+        \hline
+        BT10 & Error notification shown  & Error notification shown & Passed \\
+        \hline
+        BT11 & Image loaded successfully & Image loaded successfully & Passed \\
+        \hline
+        BT12 & Image saved successfully & Image saved successfully & Passed \\
+        \hline
+        BT13 & Error notification shown & Error notification shown & Passed \\
+        \hline
+        BT14 & Error notification shown & Error notification shown & Passed \\
+        \hline
+        BT15 & Override prompt appears & Overwrite prompt appears & Passed \\
+        \hline
+        BT16 & Controls activate on load & Controls activate on load & Passed \\
+        \hline
+        BT17 & Image loaded successfully & Image loaded successfully & Passed \\
+        \hline
+        BT18 & Error notification shown & Error notification shown & Passed \\
+        \hline
+        BT19 & Error notification shown & Error notification shown & Passed \\
+        \hline
+        BT20 & UI doesn't allow & UI doesn't allow & Passed \\
+        \hline
+        \end{tabular}
+\end{table}
+\begin{table}[H]
+    \caption{Black-box System Tests (continued)}
+    \label{tab:bb}
+    \centering
+    \begin{tabular}{|c|c|p{0.25\textwidth}||c|}
+        \hline
+        \textbf{Test ID} & \textbf{Expected result} & \textbf{Actual result} & \textbf{Result}\\
+        \hline
+        BT21 & UI doesn't allow & UI doesn't allow & Passed \\
+        \hline
+        BT22 & UI doesn't allow & UI doesn't allow & Passed \\
+        \hline
+        BT23 & Image scales successfully & Image scales successfully & Passed \\
+        \hline
+        BT24 & UI doesn't allow & UI doesn't allow & Passed \\
+        \hline
+        BT25 & Image quality is maintained & Image quality is maintained & Passed \\
+        \hline
+        BT26 & Image saved successfully & Image saved successfully & Passed \\
+        \hline
+        BT27 & Image saved successfully & Image saved successfully & Passed \\
+        \hline
+        BT28 & Error notification shown & Error notification shown & Passed \\
+        \hline
+        BT29 & Error notification shown & Overwrite prompt appears, error notification shown after & Passed \\
+        \hline
+        BT30 & Error notification shown & Error notification shown & Passed \\
+        \hline
+        BT31 & Error notification shown & UI does't allow & Passed \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{Analysis of Test Results}
+\subsection{Changes Made}
+The execution of the test results recorded above (both automated and manual), provided many opportunities to change the project code to be more robust and reliable under abnormal situations. The following are the major changes added to the system due to unexpected test results:
+\begin{itemize}
+    \item Many abnormal scenarios when saving a file were tested - most of which provided a reason to make major changes to how the system handles unexpected save requests. For example, unexpected characters in a file name and trying to overwrite a non-image file were two scenarios that broke earlier versions of the application. Thankfully, due to testing, later versions of the project were able to handle these situations appropriately.
+    \item Slight edge cases on image sizes were overlooking during earlier development of the system. As a result of testing, it was clear that the usual minimum side length of an image (1 pixel) was not supported by the Liquid Rescaling library that the project relied on, causing the system to crash when a user requested to rescale an image to have a side length less than 2 pixels long.
+    \item Extreme conditions such as scaling to a 2000x1 image were tested as well, which actually resulted in an unusual situation where the program would try and scale it into the display window, but by doing so scaled one edge of the image down to zero. In light of this, a prompt was created to warn users about this scenario, and it allows them to expand the window to fit the original image.
+\end{itemize}
+
+\subsection{Non-Functional Requirements Satisfied}
+Many of the black-box tests were inspired by the non-functional requirements defined by the development team at the beginning of the project. 
+\begin{enumerate}
+
+\item Appearance
+    To test the appearance requirements of the application human centred testing was used. A person looked at the user interface and confirmed a static design with an exit button in the top corner.
+\item Usability
+    To test usability of the application random people of random age where asked to use the application without guidance. If they could use it without instruction it would mean high usability. 
+\item Safety
+    To test safety the program was loaded with an image. This image was edited and not saved. If the app overrode the existing data with the non-saved data it would mean it was not safe. 
+\item Privacy
+    The application does not require privacy testing as it does not save any files outside of the local machine.
+\item Performance
+    The performance of the app can be tested by inputting a large image and scaling it to be very small while timing it. The launch time can be tested in the same way.
+\item Installability
+    The application runs off a single executable file making it very installable.
+\item Portability
+    To test portability the executable file can be launched on different operating systems to see if the application will run.
+\item Learning
+    The application only has 6 buttons all of which say their function on them making the learning requirement satisfied.
+
+\end{enumerate}
+
+\section{Gantt Chart}
+The updated Gantt chart can be found in the get repository named Revision 1. \textbf{See file LiquidRescalingDevelopmentSchedule - Version 4.pdf}
+
+\end{document}

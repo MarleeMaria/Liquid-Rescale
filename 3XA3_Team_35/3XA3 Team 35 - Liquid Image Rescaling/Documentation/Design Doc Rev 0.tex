@@ -1,0 +1,315 @@
+\documentclass{article}
+\usepackage{tabularx}
+\usepackage[utf8]{inputenc}
+
+\title{\bf{Design Document Revision 0}\\
+\bf{Liquid Rescaling}}
+\author{Team 35 - Marshiel \\
+Lab 03\\
+Marlee Roth - rothm1\\
+Daniel Wolff - wolffd\\
+Harsh Shah - shahhk2}
+\date{November 10, 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\tableofcontents
+
+\listoftables 
+
+\newpage
+
+\section{Revision History}
+\begin{table}[h!]
+\centering
+\caption{Revision History}
+\begin{tabular}{| c | c |}
+\hline Date & Revision  \\
+\hline November 10, 2017 & Revision 0 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\section{Introduction and Overview}
+The goal of this project is to implement a seam carving algorithm to perform content aware scaling on images. The program will intelligently scale an image in order to prevent the deformation of important features. The following documentation will be a MIS representation of the existing code for this project. The MIS will be following the design principles of information hiding and encapsulation. 
+
+\subsection{Document Structure}
+\begin{itemize}
+    \item Section 3 - Anticipated and Unlikely Changes
+    \item Section 4 - Requirements and Design Relationship
+    \item Section 5 - Module Hierarchy and Secrets
+    \item Section 6 - Traceability Matrix between Modules and Requirements
+    \item Section 7 - Module Interface Specification
+    \item Section 8 - Uses Hierarchy
+    \item Section 9 - Gantt Chart
+\end{itemize}
+
+\newpage
+
+\section{Anticipated and Unlikely Changes}
+\subsection{Anticipated changes}
+\begin{enumerate}
+    \item Changing technologies from Windows C++ CLI/.NET to Linux GTK+/GTKmm.
+    \item Changing integrated development environments from Visual Studio Community 2017 to Visual Studio Code.
+    \item Using Glade to build user interfaces instead of Visual Studio.
+\end{enumerate}
+
+\subsection{Unlikely changes}
+\begin{enumerate}
+\item General UI design/layout.
+\item LiquidRescaling module functionality.
+\item Usage of the liblqr library.
+\item Usage of the C++ programming language.
+\end{enumerate}
+
+\newpage
+
+
+\section{Requirements and Design Relationship}
+\subsection{Software Decision Module}
+The MainForm module contains generic image loading and saving handlers that can be used in other applications to provide image handling capabilities. The LiquidRescale module contains generic functions that provide a simple interface to the liblqr library. These functions can be implemented seamlessly into another project, assuming the library is available to use. 
+
+\subsection{Connection Between Requirements and Design}
+The following design decisions were made in order to satisfy the requirements of the project:
+\begin{itemize}
+\item When loading a file using the MainForm module, the image loading handler needed to take extra steps to assert that the file chosen by the user was a file accepted by the requirements (a PNG or JPEG file). 
+\item When saving a file using the MainForm module, the image saving handler needed to take extra steps to assert that the file name defined by the user matches the accepted types defined by the requirements (a PNG or JPEG file). If the file name did not satisfy this requirement, a default extension (.PNG) would be added to the file name.
+\end{itemize}
+
+
+
+
+\section{Module Hierarchy}
+\begin{table}[h!]
+    \centering
+    \caption{The Hierarchy of Modules}
+    \begin{tabular}{| c | c |}
+        \hline Level 1 & Level 2 \\
+        \hline LiquidResale.cpp &   \\  
+        \hline MainForm.cpp & MainForm.h \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+    \centering
+    \caption{One module one secret}
+    \begin{tabular}{| c | c |}
+        \hline Module & Secret \\
+        \hline MainForm & User Interface functions and Event Handlers \\  
+        \hline LiquidRescale & Algorithm used for image processing \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\section{Traceable Matrices}
+\subsection{Requirements Matrices}
+M1 \rightarrow MainForm \\
+M2 \rightarrow LiquidRescale
+
+\begin{table}[h!]
+    \centering
+    \caption{Traceability matrix between modules and requirements}
+    \begin{tabular}{| c | c |}
+        \hline Function Requirements & Module \\ 
+        \hline FR1 & M1 \\  
+        \hline FR2 & M1 \\
+        \hline FR3 & M1, M2 \\
+        \hline
+        \hline
+        \hline Non-Function Requirements & Module \\
+        \hline NF1 & M1 \\  
+        \hline NF2 & M1 \\
+        \hline NF3 & M1 \\
+        \hline NF4 & M1 \\
+        \hline NF5 & M1, M2 \\
+        \hline NF6 & M1, M2 \\
+        \hline NF7 & M1, M2 \\
+        \hline NF8 & M1 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{center}
+    \emph{Please see Requirements document for corresponding requirement.}
+\end{center}
+
+\subsection{Anticipated Changes Matrices}
+\begin{table}[h!]
+    \centering
+    \caption{Traceability matrix between modules and anticipated changes}
+    \begin{tabular}{| c | c |}
+        \hline Anticipated Change & Module \\
+        \hline AC1 & M1, M2 \\  
+        \hline AC2 & M1, M2 \\
+        \hline AC3 & M1 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\section{Module Interface Specification}
+
+\subsection{MIS for MainForm.cpp}
+
+\subsubsection* {Module}
+MainForm
+
+\subsubsection* {Uses}
+MainForm.h \\
+System \\
+System Drawing \\
+System Windows Forms
+
+\subsubsection* {Syntax}
+\subsubsection* {Exported Types}
+N/A
+
+\subsubsection* {Exported Access Programs}
+N/A
+
+\subsubsection* {Semantics}
+\subsubsection* {State Variables}
+N/A
+
+\subsubsection* {Environment Variables}
+Screen: Display Output Device \\
+Mouse: Input Device \\
+Keyboard: Input Device
+
+\newpage
+
+\subsection{MIS for LiquidRescale.cpp}
+
+\subsubsection*{Module}
+LiquidRescale
+
+\subsubsection* {Uses}
+LiquidRescale.h \\
+lqr.h \\
+System \\
+System Drawing \\
+System Windows Forms
+
+\subsubsection* {Syntax}
+\subsubsection* {Exported Types}
+N/A
+
+\subsubsection* {Exported Access Programs}
+\begin{table}[h!]
+  \centering
+  \caption{Exported Access Programs in LiquidRescale.cpp}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    Routine name & In & Out & Exceptions \\
+    \hline
+    LiquidRescaleImag & Bitmap\^{}, int, int & Bitmap\^{} & \\
+    \hline
+    bitmapFromCarver & LqrCarver* & Bitmap\^{}  & \\
+    \hline
+    bufferFromBitmap & Bitmap\^{} & guchar*  & \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection* {Semantics}
+\subsubsection* {State Variables}
+N/A
+\subsubsection* {Environment Variables}
+Screen: Display Output Device \\
+Mouse: Input Device \\
+Keyboard: Input Device
+
+\subsubsection* {Access Routine Semantics}
+Bitmap \^{} liquidRescaleImage(Bitmap \^{} bitmap, int newWidth, int newHeight) \\
+\begin{itemize}
+    \item output: out:= newBitmap
+    \item exception: out:= N/A
+\end{itemize}
+Bitmap \^{} bitmapFromCarver(LqrCarver * carver) \\
+\begin{itemize}
+    \item output: out:= newBitmap
+    \item exception: out:= N/A
+\end{itemize}
+guchar * bufferFromBitmap(Bitmap \^{} bitmap) \\
+\begin{itemize}
+    \item output: out:= buffer
+    \item exception: out:= N/A
+\end{itemize}
+
+\newpage
+
+\subsection {MIS for MainForm.h}
+
+\subsubsection* {Uses}
+LiquidRescale.h \\
+System \\
+System ComponentModel \\
+System Collections \\
+System Data \\
+System Diagnostics \\
+System Drawing \\
+System IO \\
+System Windows Forms
+
+\subsubsection* {Syntax}
+\subsubsection* {Exported Types}
+N/A
+
+\subsubsection* {Exported Access Programs}
+\begin{table}[h!]
+  \centering
+  \caption{Exported Access Programs in MainForm.h}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    Routine name & In & Out & Exceptions \\
+    \hline
+    btnLoadFile\_Click & System Object\^{}, System EventArgs\^{} & & \\
+    \hline
+    btnSaveFile\_Click & System Object\^{}, System EventArgs\^{} & & \\
+    \hline
+    MainForm\_Resize & System Object\^{}, System EventArgs\^{} & & \\
+    \hline
+    pbMainImage\_Paint & System Object\^{}, System EventArgs\^{} & & \\ 
+    \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection* {Semantics}
+\subsubsection* {State Variables}
+N/A
+\subsubsection* {Environment Variables}
+Screen: Display Output Device \\
+Mouse: Input Device \\
+Keyboard: Input Device
+
+\subsubsection*{Access Routine Semantics}
+N/A
+
+\newpage
+
+\section{Uses Hierarchy}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.7]{uses.png}
+    \caption{Uses Hierarchy}
+    \label{fig:univerise}
+\end{figure}
+
+\section{Gantt Chart}
+The updated Gantt Chart can be found in the git repository. See File \textbf{Liquid Rescaling Development Schedule - Version 3.pdf}
+
+
+
+\end{document}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding='ISO-8859-1' standalone='yes' ?>
+<TestRun>
+  <FailedTests></FailedTests>
+  <SuccessfulTests>
+    <Test id="1">
+      <Name>TestLiquidRescaleApp::testGetFileExtension</Name>
+    </Test>
+    <Test id="2">
+      <Name>TestLiquidRescaleApp::testBestFitToDimensions</Name>
+    </Test>
+    <Test id="3">
+      <Name>TestLiquidRescaleApp::testDimensions</Name>
+    </Test>
+    <Test id="4">
+      <Name>TestLiquidRescaleApp::testLiquidRescaleImage</Name>
+    </Test>
+    <Test id="5">
+      <Name>TestLiquidRescaleApp::testBufferFromPixbuf</Name>
+    </Test>
+    <Test id="6">
+      <Name>TestLiquidRescaleApp::testPixbufFromCarver</Name>
+    </Test>
+  </SuccessfulTests>
+  <Statistics>
+    <Tests>6</Tests>
+    <FailuresTotal>0</FailuresTotal>
+    <Errors>0</Errors>
+    <Failures>0</Failures>
+  </Statistics>
+</TestRun>

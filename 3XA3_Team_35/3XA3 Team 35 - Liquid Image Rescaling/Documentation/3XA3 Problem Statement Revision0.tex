@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{3XA3 Problem Statement\\
+Liquid Rescaling}
+\author{Team 35 - Marshiel \\
+Lab 03\\
+Harsh Shah \\
+Daniel Wolff\\
+Marlee Roth}
+
+
+\begin{document}
+\maketitle
+
+\section{The problem at hand.}
+
+People manipulate millions of photos everyday. There are two main types of
+manipulations; cropping and scaling. Cropping a photo removes aspects of an image; for
+example if you crop an image in which two people are on opposite sides one person will be deleted, it can also be used to cut things out of photos, leaving harsh edges where the cropping took place. Scaling a photo works well if the aspect ratio is maintained otherwise the image could look stretched out or squished. To solve these issues a Liquid Rescaling algorithm can be used. This algorithm is a method to scale a photo without cutting out important aspects, and keeps the image in proportion. The Liquid Rescaling algorithm also allows a user to remove parts of a photo without leaving harsh lines or
+obvious changes in the photo. This algorithm is available in the GNU Image Manipulation Program (GIMP) photo editor however this application has a tedious and slow user interface. To rectify this  a new application shall be developed. 
+
+\section{Why is this problem important? Who are the stakeholders?}
+
+Every since the advancements in imaging and video technology, people have worked to find solutions to rescale images to their liking. The rate of the increase in image consumption has been increasing at unprecedented rates over the past decade. Image editing algorithms such as a Liquid Rescaling algorithm is now more important than ever before due to the consumption of images and videos via social media platforms (like Facebook, Twitter, Instagram and Snapchat). Because social media platforms are such an intricate part of all our daily lives it is very important for people to be able to manipulate images to their liking. Which is why tools such as the GIMP Liquid Rescaling Library play a major role in all our lives. The users range from children to older adults and as such creating a liquid rescaling application with an effective user interface is very important.
+
+\section{What is the context of the problem you are solving?}
+
+The purpose of a liquid image rescaling tool involves providing the ability to resize an image in a
+way that protects the features of the content that a user desires to preserve, as well as the
+ability to remove undesired content. The goal of this project is to provide a simplistic user
+interface for this tool. Currently, the scope of this project remains within the Windows desktop
+environment, however there is a lot of potential to expand to other platforms such as Android and IOS.
+
+
+\end{document}

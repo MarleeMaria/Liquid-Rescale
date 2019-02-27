@@ -1,0 +1,27 @@
+#grdControls {
+    background-color: rgb(150,150,150);
+    border-left: 2px solid rgb(75,75,75);
+}
+#grdMainLayout {
+    background-color: rgb(100,100,100);
+}
+#lblLoadSave {
+    background-color: rgb(125,125,125);
+    border: 2px solid rgb(75,75,75);
+    color: rgb(225,225,225);
+}
+#lblLiquidRescale {
+    background-color: rgb(125,125,125);
+    border: 2px solid rgb(75,75,75);
+    color: rgb(225,225,225);
+}
+#lblWidth {
+    color: rgb(50,50,50);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+#lblHeight {
+    color: rgb(50,50,50);
+    font-weight: bold;
+    font-size: 1.2em;
+}
